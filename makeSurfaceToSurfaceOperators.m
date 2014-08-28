@@ -1,6 +1,6 @@
 function operstruct = makeSurfaceToSurfaceOperators(surf)
 
-[V,K] = genPointMatrices(surf.points, surf.normals, surf.weights);
+[V,K] = genPointLaplaceMatrices(surf.points, surf.normals, surf.weights);
 
 if 0
   [V_eigenvecs,V_eigenvals]= eig(V);

@@ -15,14 +15,14 @@ numPoints = ceil(4 * pi * R^2)
 pqrdata         = makeSphereChargeDistribution(R, numCharges, h); 
 
 actualSRFdata   = loadSrfIntoSurfacePoints(srfFile);
-SRFSRFop = makeSurfaceToSurfaceOperators(actualSRFdata);
+SRFSRFop = makeSurfaceToSurfaceLaplaceOperators(actualSRFdata);
 chargeSRFop = makeSurfaceToChargeOperators(actualSRFdata, pqrdata);
-bemSRF = makeBemMatrices(actualSRFdata, pqrdata, SRFSRFop, chargeSRFop,  epsIn, epsOut);
+bemSRF = makeBemEcfQualMatrices(actualSRFdata, pqrdata, SRFSRFop, chargeSRFop,  epsIn, epsOut);
 
 simplesurfdata   = makeSphereSurface(origin, R, numPoints);
-simpleSRFop = makeSurfaceToSurfaceOperators(simplesurfdata);
+simpleSRFop = makeSurfaceToSurfaceLaplaceOperators(simplesurfdata);
 chargeSimpleop = makeSurfaceToChargeOperators(simplesurfdata, pqrdata);
-bemSimple = makeBemMatrices(simplesurfdata, pqrdata, simpleSRFop, chargeSimpleop,  epsIn, epsOut);
+bemSimple = makeBemEcfQualMatrices(simplesurfdata, pqrdata, simpleSRFop, chargeSimpleop,  epsIn, epsOut);
 
 LSRF = bemSRF.C * (bemSRF.A\bemSRF.B);
 LSimple = bemSimple.C * (bemSimple.A\bemSimple.B);
