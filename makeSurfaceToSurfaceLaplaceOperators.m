@@ -8,7 +8,7 @@ else
 				  surf2.normals, surf2.weights);
 end
 
-if 0
+if 1
   [V_eigenvecs,V_eigenvals]= eig(V);
   lambda=diag(V_eigenvals);
   [j1,I] = sort(real(lambda),'descend');
@@ -20,6 +20,12 @@ if 0
   [j1,I] = sort(real(lambda),'ascend');
   K_eigenvals = lambda(I);
   K_eigenvecs = K_eigenvecs(:,I);
+
+  [W_eigenvecs,W_eigenvals]= eig(W);
+  lambda=diag(W_eigenvals);
+  [j1,I] = sort(real(lambda),'ascend');
+  W_eigenvals = lambda(I);
+  W_eigenvecs = W_eigenvecs(:,I);
 else
   V_eigenvecs = 0; V_eigenvals = 0;
   K_eigenvecs = 0; K_eigenvals = 0;
