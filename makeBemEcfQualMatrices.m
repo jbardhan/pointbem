@@ -1,8 +1,8 @@
 function bem = makeBemEcfQualMatrices(surf, pqr, epsIn, epsOut)
 
 epsHat = (epsIn+epsOut)/(epsIn-epsOut);
-surfsurfop = makeSurfaceToSurfaceLaplaceOperators(surfdata);
-chargesurfop = makeSurfaceToChargeOperators(surfdata, pqrdata);
+surfsurfop = makeSurfaceToSurfaceLaplaceOperators(surf);
+chargesurfop = makeSurfaceToChargeOperators(surf, pqr);
 
 % the two factors below 
 B = -1*    diag(surf.weights)*chargesurfop.dphidnCoul / epsIn;

@@ -30,17 +30,21 @@ for i=1:Ndest
 	 vecr = destpoints(i,:)-points(j,:);
 	 r = norm(vecr);
 	 if r > 1e-6
-		V(i,j) = weights(j)* 1/4/pi/r;
-		K(i,j) = weights(j)* vecr*normals(j,:)'/4/pi/r/r/r;
-		
-		if ~computingOperatorFromSurfaceToItself
-		  n0 = destnormals(i,:);
-		  n  = normals(j,:);
-		  cosTheta = vecr*n'/r;
-		  cosTheta0 = vecr*n0'/r;
-		  W(i,j) = weights(j)*((n0*n')-3*cosTheta* ...
-				       cosTheta0)/4/pi/r/r/r;
-		end
+	   V(i,j) = weights(j)* 1/4/pi/r;
+	   K(i,j) = weights(j)* vecr*normals(j,:)'/4/pi/r/r/r;
+	   
+	   if ~computingOperatorFromSurfaceToItself
+	     n0 = destnormals(i,:);
+	     n  = normals(j,:);
+	     cosTheta = vecr*n'/r;
+	     cosTheta0 = vecr*n0'/r;
+	     W(i,j) = weights(j)*((n0*n')-3*cosTheta* ...
+				  cosTheta0)/4/pi/r/r/r;
+	   end
+	 else
+	   R0 = sqrt(weights(j)/pi); % radius of a circle with the
+                                     % area assoc with surfpt j
+	   V(j,j) = (2 * pi * R0) /4/pi;
 	 end
   end
 end
