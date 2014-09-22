@@ -15,14 +15,10 @@ numPoints = ceil(4 * pi * R^2)
 pqrdata         = makeSphereChargeDistribution(R, numCharges, h); 
 
 actualSRFdata   = loadSrfIntoSurfacePoints(srfFile);
-SRFSRFop = makeSurfaceToSurfaceLaplaceOperators(actualSRFdata);
-chargeSRFop = makeSurfaceToChargeOperators(actualSRFdata, pqrdata);
-bemSRF = makeBemEcfQualMatrices(actualSRFdata, pqrdata, SRFSRFop, chargeSRFop,  epsIn, epsOut);
+bemSRF = makeBemEcfQualMatrices(actualSRFdata, pqrdata, epsIn, epsOut);
 
 simplesurfdata   = makeSphereSurface(origin, R, numPoints);
-simpleSRFop = makeSurfaceToSurfaceLaplaceOperators(simplesurfdata);
-chargeSimpleop = makeSurfaceToChargeOperators(simplesurfdata, pqrdata);
-bemSimple = makeBemEcfQualMatrices(simplesurfdata, pqrdata, simpleSRFop, chargeSimpleop,  epsIn, epsOut);
+bemSimple = makeBemEcfQualMatrices(simplesurfdata, pqrdata, epsIn, epsOut);
 
 LSRF = bemSRF.C * (bemSRF.A\bemSRF.B);
 LSimple = bemSimple.C * (bemSimple.A\bemSimple.B);
@@ -37,3 +33,4 @@ fprintf('Eref = %f\nESRF = %f\nError = %f\nRel. error = %f\n',...
 	Eref, ESRF, Eref-ESRF, (Eref-ESRF)/Eref);
 fprintf('Eref = %f\nESimple = %f\nError = %f\nRel. error = %f\n',...
 	Eref, ESimple, Eref-ESimple, (Eref-ESimple)/Eref);
+

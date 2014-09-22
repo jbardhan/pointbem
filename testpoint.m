@@ -11,13 +11,7 @@ density = 1.0;
 h       = 1.0;
 numPoints = ceil(4 * pi * R^2)
 
-surfdata   = makeSphereSurface(origin, R, numPoints);
-pqrdata  = makeSphereChargeDistribution(R, numCharges, h); 
-
-surfsurfop = makeSurfaceToSurfaceLaplaceOperators(surfdata);
-chargesurfop = makeSurfaceToChargeOperators(surfdata, pqrdata);
-
-bem = makeBemEcfQualMatrices(surfdata, pqrdata, surfsurfop, chargesurfop,  epsIn, epsOut);
+bem = makeBemEcfQualMatrices(surfdata, pqrdata, epsIn, epsOut);
 
 L = bem.C * (bem.A\bem.B);
 Lref = doAnalytical(R, epsIn, epsOut, pqrdata, 100); Lref = real(Lref);
