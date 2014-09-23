@@ -8,7 +8,7 @@ else
 				  surf2.normals, surf2.weights);
 end
 
-if 1
+if 0
   [V_eigenvecs,V_eigenvals]= eig(V);
   lambda=diag(V_eigenvals);
   [j1,I] = sort(real(lambda),'descend');
