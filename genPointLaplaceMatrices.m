@@ -49,6 +49,7 @@ for i=1:Ndest
   end
 end
 
+if 0
 if computingOperatorFromSurfaceToItself
   if printInfo 
     fprintf('genPointLaplaceMatrices: calculating hypersingular');
@@ -60,4 +61,7 @@ if computingOperatorFromSurfaceToItself
   V_eigenvals = lambda(I);
   V_eigenvecs = V_eigenvecs(:,I);
   W = V_eigenvecs * (diag(1./V_eigenvals) * (V_eigenvecs'*(.25*(eye(size(K,1))-K^2))));
+end
+else
+  W = 0;
 end
