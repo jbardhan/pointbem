@@ -1,4 +1,4 @@
-function vfstruct = readmesh(base,noHeader)
+function vfstruct = readmesh(base,noHeader,noPrune)
 
 vertfile = sprintf('%s.vert', base);
 facefile = sprintf('%s.face', base);
@@ -24,6 +24,7 @@ n = [nx ny nz];
 f = [v1 v3 v2];
 
 %%%%%%
+if ~ noPrune
 thresholdDistance = 1e-4;
 thresholdArea     = 1e-6;
 faceGood = [];
@@ -49,7 +50,7 @@ f = f(find(faceGood),:);
 %v = v(Iv,:); 
 %n = n(Iv,:);
 %%%%%
-
+end
 for i=1:size(f, 1)
   X(:,i) = v(f(i,1:3),1);
   Y(:,i) = v(f(i,1:3),2);
