@@ -1,7 +1,7 @@
 function surfdata = loadSrfIntoSurfacePoints(srf)
 
 [meshBase,rootDir] = readsrf(srf);
-meshData = readmesh(meshBase,1);
+meshData = readmesh(meshBase,1,0);
 [panelCentroids,panelNormals,panelAreas] = genmeshcolloc(meshData);
 
 vertexWeights = zeros(size(meshData.vert,1),1);
@@ -11,6 +11,7 @@ end
 thresholdDistance = 1e-6;
 thresholdWeight = 1e-4;
 eliminateList = ones(length(vertexWeights),1);
+keyboard
 for i=1:length(vertexWeights)
   if vertexWeights(i) < thresholdWeight
     eliminateList(i) = 0;

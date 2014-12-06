@@ -44,7 +44,7 @@ for i=1:Ndest
   end
 end
 
-if computingOperatorFromSurfaceToItself
+if 0
   if printInfo 
     fprintf('genPointYukawaMatrices: calculating hypersingular');
     fprintf(' operator using Calderon formula \n\tW = V^{-1} (1/4 * (I - K^2))\n');
